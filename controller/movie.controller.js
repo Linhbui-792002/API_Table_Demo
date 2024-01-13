@@ -25,7 +25,7 @@ const getAllMovie = async (req, res) => {
     ];
     genre === "All"
       ? (genre = [...genreOptions])
-      : (genre = req.query.split(","));
+      : (genre = req.query.genre.split(","));
 
     req.query.sort ? (sort = req.query.sort.split(",")) : (sort = [sort]);
 
@@ -35,7 +35,14 @@ const getAllMovie = async (req, res) => {
     } else {
       sortBy[sort[0]] = "asc";
     }
-    console.log(sortBy, "sortBy", sortBy[sort[0]], " sortBy[sort[0]]",sort[0],sort[1]);
+    console.log(
+      sortBy,
+      "sortBy",
+      sortBy[sort[0]],
+      " sortBy[sort[0]]",
+      sort[0],
+      sort[1]
+    );
     const movies = await movie
       .find({
         name: { $regex: new RegExp(search, "i") },
